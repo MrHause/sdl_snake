@@ -4,6 +4,7 @@
 #include "Collision.h"
 #include <time.h>
 #include <stdlib.h>
+#include <vector>
 
 Game::Game() {}
 
@@ -14,8 +15,10 @@ SDL_Renderer* Game::gameRenderer;
 
 Manager manager;
 auto& snakeHead(manager.addEntity());
-auto& snakeTail(manager.addEntity());
+//auto& snakeTail(manager.addEntity());
 auto& food(manager.addEntity());
+
+std::vector<std::unique_ptr<Entity>> snakeTail;
 
 SDL_Texture* player;
 SDL_Rect srcRect, dstRect;
@@ -72,6 +75,7 @@ void Game::handleEvents() {
 void Game::update() {
 	if (Collision::AABB(snakeHead.getComponent<ColliderComponent>().collider, food.getComponent<ColliderComponent>().collider)) {
 		//!! add update food transform component
+		Vector2D currentFoodPosition = food.getComponent<TransformComponent>().getTransformPosition();
 		std::cout << "hit food" << std::endl;
 		int food_xpos, food_ypos;
 		food_xpos = (rand() % 780 + 1) / 20;
@@ -79,16 +83,30 @@ void Game::update() {
 		food_ypos = (rand() % 620 + 1) / 20;
 		food_ypos *= 20;
 		food.getComponent<FoodComponent>().updateFoodPosition(food_xpos, food_ypos);
+
+		auto& newTailElement(manager.addEntity());
+		std::unique_ptr<Entity> uPtr{ &newTailElement };
+		snakeTail.emplace_back(std::move(uPtr));
+		unsigned int len = snakeTail.size();
+		snakeTail.at(len - 1)->addComponent<TransformComponent>((float)currentFoodPosition.x, (float)currentFoodPosition.y, 20, 20, 1);
+		snakeTail.at(len - 1)->addComponent<SpriteComponent>("assets/dirt.png", &snakeHead.getComponent<SpriteComponent>());
+		if (len > 1) {
+			snakeTail.at(len - 2)->getComponent<SpriteComponent>().setPreviouComponent(&snakeTail.at(len - 1)->getComponent<SpriteComponent>());
+		}
+
+		//snakeTail.addComponent<TransformComponent>(280.0f, 300.0f, 20, 20, 1);
+		//snakeTail.addComponent<SpriteComponent>("assets/dirt.png", &snakeHead.getComponent<SpriteComponent>());
 	}
 
 	manager.refresh();
 	manager.update();
 
-
+	/*
 	if (snakeHead.getComponent<TransformComponent>().position.x == 360) {
 		snakeTail.addComponent<TransformComponent>(280.0f, 300.0f, 20, 20, 1);
 		snakeTail.addComponent<SpriteComponent>("assets/dirt.png", &snakeHead.getComponent<SpriteComponent>());
 	}
+	*/
 }
 
 void Game::render() {

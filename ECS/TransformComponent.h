@@ -32,9 +32,15 @@ public:
 	TransformComponent(int x, int y, int w, int h, int scl) {
 		position.x = x;
 		position.y = y;
+		previousPostion.x = x;
+		previousPostion.y = y;
 		height = h;
 		width = w;
 		scale = scl;
+	}
+
+	Vector2D getTransformPosition() {
+		return position;
 	}
 
 	void init() override {

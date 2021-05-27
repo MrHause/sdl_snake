@@ -22,11 +22,15 @@ public:
 
 	SpriteComponent(const char* path, SpriteComponent* spriteComp) {
 		setTex(path);
-		previousComponent = spriteComp;
+		setPreviouComponent(spriteComp);
 	}
 
 	~SpriteComponent() {
 		SDL_DestroyTexture(texture);
+	}
+	
+	void setPreviouComponent(SpriteComponent* spriteComp) {
+		previousComponent = spriteComp;
 	}
 
 	void setTex(const char* path) {
@@ -48,6 +52,8 @@ public:
 		}else {
 			dstRect.x = static_cast<int>(previousComponent->transform->previousPostion.x);
 			dstRect.y = static_cast<int>(previousComponent->transform->previousPostion.y);
+			transform->position.x = previousComponent->transform->previousPostion.x;
+			transform->position.y = previousComponent->transform->previousPostion.y;
 		}
 		dstRect.w = transform->width * transform->scale;
 		dstRect.h = transform->height * transform->scale;
