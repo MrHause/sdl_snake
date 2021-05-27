@@ -70,14 +70,20 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+	if (Collision::AABB(snakeHead.getComponent<ColliderComponent>().collider, food.getComponent<ColliderComponent>().collider)) {
+		//!! add update food transform component
+		std::cout << "hit food" << std::endl;
+		int food_xpos, food_ypos;
+		food_xpos = (rand() % 780 + 1) / 20;
+		food_xpos *= 20;
+		food_ypos = (rand() % 620 + 1) / 20;
+		food_ypos *= 20;
+		food.getComponent<FoodComponent>().updateFoodPosition(food_xpos, food_ypos);
+	}
+
 	manager.refresh();
 	manager.update();
 
-	if (Collision::AABB(snakeHead.getComponent<ColliderComponent>().collider, food.getComponent<ColliderComponent>().collider)) {
-		food.destroy();
-		std::cout << "hit food" << std::endl;
-		food.addComponent<FoodComponent>("assets/water.png");
-	}
 
 	if (snakeHead.getComponent<TransformComponent>().position.x == 360) {
 		snakeTail.addComponent<TransformComponent>(280.0f, 300.0f, 20, 20, 1);
