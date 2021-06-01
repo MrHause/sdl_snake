@@ -37,7 +37,6 @@ bool SnakeElements::detectFoodCollision() {
 }
 
 void SnakeElements::snakeAddTailElement(Manager *manager) {
-	
 	Vector2D currentFoodPosition = food.getComponent<TransformComponent>().getTransformPosition();
 	auto& newTailElement(manager->addEntity());
 	std::unique_ptr<Entity> uPtr{ &newTailElement };
@@ -48,5 +47,4 @@ void SnakeElements::snakeAddTailElement(Manager *manager) {
 	if (len > 1) {
 		snakeTail.at(len - 2)->getComponent<SpriteComponent>().setPreviouComponent(&snakeTail.at(len - 1)->getComponent<SpriteComponent>());
 	}
-	
 }
