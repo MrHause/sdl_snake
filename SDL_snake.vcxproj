@@ -153,6 +153,7 @@
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SnakeElements.cpp" />
     <ClCompile Include="TextureMenager.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="ECS\SpriteComponent.h" />
     <ClInclude Include="ECS\TransformComponent.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="SnakeElements.h" />
     <ClInclude Include="TextureMenager.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
