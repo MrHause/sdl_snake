@@ -15,8 +15,6 @@ SDL_Event Game::event;
 SDL_Renderer* Game::gameRenderer;
 
 Manager manager;
-auto& snakeHead(manager.addEntity());
-auto& food(manager.addEntity());
 
 std::vector<std::unique_ptr<Entity>> snakeTail;
 
@@ -53,6 +51,12 @@ void Game::update() {
 	if (snake->detectFoodCollision()) {
 		snake->snakeAddTailElement(&manager);
 		snake->foodUpdatePosition();
+	}
+
+	if (snake->detectWallCollision()) {
+		snake->destroySnakeComponnets();
+		isRunning = false;
+		std::cout << "WALL HIT" << std::endl;
 	}
 
 	manager.refresh();

@@ -36,6 +36,12 @@ bool SnakeElements::detectFoodCollision() {
 	return false;
 }
 
+bool SnakeElements::detectWallCollision() {
+	if (Collision::wallHit(snakeHead.getComponent<ColliderComponent>().collider))
+		return true;
+	return false;
+}
+
 void SnakeElements::snakeAddTailElement(Manager *manager) {
 	Vector2D currentFoodPosition = food.getComponent<TransformComponent>().getTransformPosition();
 	auto& newTailElement(manager->addEntity());
@@ -47,4 +53,12 @@ void SnakeElements::snakeAddTailElement(Manager *manager) {
 	if (len > 1) {
 		snakeTail.at(len - 2)->getComponent<SpriteComponent>().setPreviouComponent(&snakeTail.at(len - 1)->getComponent<SpriteComponent>());
 	}
+}
+
+void SnakeElements::destroySnakeComponnets() {
+	snakeHead.destroy();
+	for (auto& tailEntity : snakeTail) {
+		tailEntity->destroy();
+	}
+	food.destroy();
 }

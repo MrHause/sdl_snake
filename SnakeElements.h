@@ -16,5 +16,7 @@ public:
 	void snakeAddTailElement(Manager* manager);
 	void foodUpdatePosition();
 	bool detectFoodCollision();
+	bool detectWallCollision();
+	void destroySnakeComponnets();
 };
 
