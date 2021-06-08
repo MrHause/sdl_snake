@@ -52,8 +52,8 @@ public:
 		}else {
 			dstRect.x = static_cast<int>(previousComponent->transform->previousPostion.x);
 			dstRect.y = static_cast<int>(previousComponent->transform->previousPostion.y);
-			transform->position.x = previousComponent->transform->position.x;
-			transform->position.y = previousComponent->transform->position.y;
+			transform->position.x = previousComponent->transform->previousPostion.x;
+			transform->position.y = previousComponent->transform->previousPostion.y;
 		}
 		dstRect.w = transform->width * transform->scale;
 		dstRect.h = transform->height * transform->scale;

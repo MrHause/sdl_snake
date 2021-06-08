@@ -16,8 +16,6 @@ SDL_Renderer* Game::gameRenderer;
 
 Manager manager;
 
-std::vector<std::unique_ptr<Entity>> snakeTail;
-
 SnakeElements *snake;
 
 void Game::init(const char* title, int xpos, int ypos, int width, int leght, bool fullScreen) {
@@ -57,6 +55,12 @@ void Game::update() {
 		snake->destroySnakeComponnets();
 		isRunning = false;
 		std::cout << "WALL HIT" << std::endl;
+	}
+
+	if (snake->detectTailCollision()) {
+		snake->destroySnakeComponnets();
+		isRunning = false;
+		std::cout << "TAIL HIT" << std::endl;
 	}
 
 	manager.refresh();

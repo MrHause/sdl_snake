@@ -43,16 +43,35 @@ bool SnakeElements::detectWallCollision() {
 }
 
 void SnakeElements::snakeAddTailElement(Manager *manager) {
-	Vector2D currentFoodPosition = food.getComponent<TransformComponent>().getTransformPosition();
+	//Vector2D currentFoodPosition = food.getComponent<TransformComponent>().getTransformPosition();
+	Vector2D currentFoodPosition;
+	if(snakeTail.size() > 0)
+		currentFoodPosition  = snakeTail.at(0)->getComponent<TransformComponent>().getTransformPosition();
+	else
+		currentFoodPosition = snakeHead.getComponent<TransformComponent>().getTransformPosition();
+
 	auto& newTailElement(manager->addEntity());
 	std::unique_ptr<Entity> uPtr{ &newTailElement };
 	snakeTail.emplace_back(std::move(uPtr));
 	unsigned int len = snakeTail.size();
 	snakeTail.at(len - 1)->addComponent<TransformComponent>((float)currentFoodPosition.x, (float)currentFoodPosition.y, 20, 20, 1);
-	snakeTail.at(len - 1)->addComponent<SpriteComponent>("assets/dirt.png", &snakeHead.getComponent<SpriteComponent>());
-	if (len > 1) {
-		snakeTail.at(len - 2)->getComponent<SpriteComponent>().setPreviouComponent(&snakeTail.at(len - 1)->getComponent<SpriteComponent>());
+	if(len == 1)
+		snakeTail.at(len - 1)->addComponent<SpriteComponent>("assets/dirt.png", &snakeHead.getComponent<SpriteComponent>());
+	else
+		snakeTail.at(len - 1)->addComponent<SpriteComponent>("assets/dirt.png", &snakeTail.at(len - 2)->getComponent<SpriteComponent>());
+
+	std::string coliderTag = "tail" + std::to_string(snakeTail.size());
+	snakeTail.at(len - 1)->addComponent<ColliderComponent>(coliderTag);
+	tailColiders.push_back(&snakeTail.at(len - 1)->getComponent<ColliderComponent>());
+}
+
+bool SnakeElements::detectTailCollision() {
+	for (auto col : tailColiders) {
+		if (Collision::AABB(snakeHead.getComponent<ColliderComponent>().collider, col->collider)) {
+			return true;
+		}
 	}
+	return false;
 }
 
 void SnakeElements::destroySnakeComponnets() {
