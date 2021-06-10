@@ -60,6 +60,6 @@ public:
 	}
 
 	void draw() override {
-		TextureMenager::Draw(texture, srcRect, dstRect);
+		TextureMenager::Draw(texture, srcRect, dstRect, transform->degree, SDL_FLIP_NONE);
 	}
 };

@@ -37,6 +37,6 @@ public:
 	}
 
 	void draw() override {
-		TextureMenager::Draw(texture, srcRect, dstRect);
+		TextureMenager::Draw(texture, srcRect, dstRect, 0, SDL_FLIP_NONE);
 	}
 };

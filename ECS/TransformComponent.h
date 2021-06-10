@@ -13,6 +13,7 @@ public:
 	int width = 20;
 	int scale = 1;
 
+	float degree = 0;
 	int speed = 20;
 
 	TransformComponent() {

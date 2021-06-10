@@ -20,24 +20,28 @@ public:
 				if (transform->velocity.y != 1) {
 					transform->velocity.x = 0;
 					transform->velocity.y = -1;
+					transform->degree = 270.0;
 				}
 				break;
 			case SDLK_a:
 				if (transform->velocity.x != 1) {
 					transform->velocity.y = 0;
 					transform->velocity.x = -1;
+					transform->degree = 180;
 				}
 				break;
 			case SDLK_d:
 				if (transform->velocity.x != -1) {
 					transform->velocity.y = 0;
 					transform->velocity.x = 1;
+					transform->degree = 0;
 				}
 				break;
 			case SDLK_s:
 				if (transform->velocity.y != -1) {
 					transform->velocity.x = 0;
 					transform->velocity.y = 1;
+					transform->degree = 90.0;
 				}
 				break;
 			default:
