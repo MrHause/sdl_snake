@@ -11,7 +11,7 @@ int main() {
 	int frameTime;
 
 	game = new Game();
-	game->init("gameTest", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
+	game->init("gameTest", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Game::WIN_WIDTH, Game::WIN_HIGHT, false);
 
 	while (game->isGameRunning()) {
 		frameStart = SDL_GetTicks();

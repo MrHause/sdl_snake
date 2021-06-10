@@ -5,6 +5,13 @@
 class Game
 {
 public:
+	enum winParam {
+		WIN_WIDTH = 420,
+		WIN_HIGHT = 600,
+		ELEMENT_WIDTH = 20,
+		ELEMENT_HIGHT = 20
+	};
+
 	Game();
 	~Game();
 
