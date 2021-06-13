@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameStates.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SnakeElements.cpp" />
     <ClCompile Include="TextureMenager.cpp" />
@@ -167,6 +168,8 @@
     <ClInclude Include="ECS\SpriteComponent.h" />
     <ClInclude Include="ECS\TransformComponent.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameEnd.h" />
+    <ClInclude Include="GameStates.h" />
     <ClInclude Include="SnakeElements.h" />
     <ClInclude Include="TextureMenager.h" />
     <ClInclude Include="Vector2D.h" />

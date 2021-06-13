@@ -3,6 +3,7 @@
 #include "../Game.h"
 #include "ECS.h"
 #include "Components.h"
+#include "../GameStates.h"
 
 class KeyboardKontroller : public Component {
 public:
@@ -14,8 +15,8 @@ public:
 	}
 
 	void update() override {
-		if (Game::event.type == SDL_KEYDOWN) {
-			switch (Game::event.key.keysym.sym) {
+		if (GameContext::event.type == SDL_KEYDOWN) {
+			switch (GameContext::event.key.keysym.sym) {
 			case SDLK_w:
 				if (transform->velocity.y != 1) {
 					transform->velocity.x = 0;

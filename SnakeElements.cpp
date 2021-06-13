@@ -6,7 +6,6 @@
 SnakeElements::SnakeElements(Manager* manager) : snakeHead(manager->addEntity()), food(manager->addEntity()) {
 	//snakeHead = manager->addEntity();
 	//food = manager->addEntity();
-
 	snakeHead.addComponent<TransformComponent>(240.0f, 200.0f, Game::ELEMENT_WIDTH, Game::ELEMENT_HIGHT, 1);
 	snakeHead.addComponent<KeyboardKontroller>();
 	snakeHead.addComponent<SpriteComponent>("assets/head.png");
