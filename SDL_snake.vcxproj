@@ -169,6 +169,7 @@
     <ClInclude Include="ECS\TransformComponent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameEnd.h" />
+    <ClInclude Include="GameStart.h" />
     <ClInclude Include="GameStates.h" />
     <ClInclude Include="SnakeElements.h" />
     <ClInclude Include="TextureMenager.h" />

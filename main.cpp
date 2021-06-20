@@ -1,9 +1,8 @@
 #define SDL_MAIN_HANDLED
 #include "SDL.h"
 #include "Game.h"
+#include "GameStart.h"
 #include "GameStates.h"
-
-//Game* game = nullptr;
 
 GameContext* game = nullptr;
 
@@ -15,7 +14,7 @@ int main() {
 
 	game = new GameContext();
 	game->gameInit("gameTest", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Game::WIN_WIDTH, Game::WIN_HIGHT, false);
-	game->TransitionTo(new Game);
+	game->TransitionTo(new GameStart("assets/gameStart.png"));
 	while (game->getGameState() == GameContext::gameRunning) {
 		frameStart = SDL_GetTicks();
 		game->handleEvents();

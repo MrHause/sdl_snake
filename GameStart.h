@@ -1,16 +1,17 @@
 #pragma once
+#pragma once
 
 #include "SDL.h"
 #include "GameStates.h"
 #include "TextureMenager.h"
 
-class GameEnd : public GameStates {
+class GameStart : public GameStates {
 private:
 	SDL_Texture* texture;
 	SDL_Rect srcRect, dstRect;
 
 public:
-	GameEnd(const char *path){
+	GameStart(const char* path) {
 		texture = TextureMenager::loadTexture(path);
 		srcRect.x = 0;
 		srcRect.y = 0;
@@ -22,7 +23,7 @@ public:
 		dstRect.y = 120;
 	}
 
-	~GameEnd(){
+	~GameStart() {
 	}
 
 	void update() override {
