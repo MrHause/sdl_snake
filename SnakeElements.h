@@ -8,7 +8,7 @@ class SnakeElements
 private:
 	Entity& snakeHead;
 	Entity& food;
-	std::vector<std::unique_ptr<Entity>> snakeTail;
+	std::vector<Entity*> snakeTail;
 	std::vector<ColliderComponent*> tailColiders;
 
 public:

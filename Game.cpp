@@ -30,6 +30,7 @@ void Game::update() {
 
 	if (snake->detectWallCollision()) {
 		snake->destroySnakeComponnets();
+		manager.refresh();
 		this->context_->TransitionTo(new GameEnd("assets/gameOver.png"));
 		std::cout << "WALL HIT" << std::endl;
 		return;
@@ -37,6 +38,7 @@ void Game::update() {
 
 	if (snake->detectTailCollision()) {
 		snake->destroySnakeComponnets();
+		manager.refresh();
 		this->context_->TransitionTo(new GameEnd("assets/gameOver.png"));
 		std::cout << "TAIL HIT" << std::endl;
 		return;

@@ -22,6 +22,10 @@ public:
 		texture = TextureMenager::loadTexture(texturePath);
 	}
 
+	~FoodComponent() {
+		SDL_DestroyTexture(texture);
+	}
+
 	void updateFoodPosition(int xpos, int ypos) {
 		dstRect.x = transform->position.x = xpos;
 		dstRect.y = transform->position.y = ypos;

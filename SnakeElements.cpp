@@ -47,8 +47,7 @@ void SnakeElements::snakeAddTailElement(Manager *manager) {
 		currentFoodPosition = snakeHead.getComponent<TransformComponent>().getTransformPosition();
 
 	auto& newTailElement(manager->addEntity());
-	std::unique_ptr<Entity> uPtr{ &newTailElement };
-	snakeTail.emplace_back(std::move(uPtr));
+	snakeTail.push_back(&newTailElement);
 	unsigned int len = snakeTail.size();
 	snakeTail.at(len - 1)->addComponent<TransformComponent>((float)currentFoodPosition.x, (float)currentFoodPosition.y, Game::ELEMENT_WIDTH, Game::ELEMENT_HIGHT, 1);
 	if(len == 1)
@@ -76,4 +75,6 @@ void SnakeElements::destroySnakeComponnets() {
 		tailEntity->destroy();
 	}
 	food.destroy();
+	snakeTail.clear();
+	tailColiders.clear();
 }

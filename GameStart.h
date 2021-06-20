@@ -24,19 +24,21 @@ public:
 	}
 
 	~GameStart() {
+		SDL_DestroyTexture(texture);
 	}
 
 	void update() override {
 		dstRect.x = 0;
 		dstRect.y = 120;
+		keyboardHandler();
 	}
 
 	void render() override {
-		if (keyboardHandler())
-			return;
-		SDL_RenderClear(GameContext::gameRenderer);
-		TextureMenager::Draw(texture, srcRect, dstRect, 0.0f, SDL_FLIP_NONE);
-		SDL_RenderPresent(GameContext::gameRenderer);
+		if (texture) {
+			SDL_RenderClear(GameContext::gameRenderer);
+			TextureMenager::Draw(texture, srcRect, dstRect, 0.0f, SDL_FLIP_NONE);
+			SDL_RenderPresent(GameContext::gameRenderer);
+		}
 	}
 
 	void clear() override {
