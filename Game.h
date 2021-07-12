@@ -13,6 +13,12 @@ public:
 		ELEMENT_HIGHT = 20
 	};
 
+	enum gameGroups {
+		groupFood = 0,
+		groupSnake,
+		groupColliders
+	};
+
 	Game();
 	~Game();
 

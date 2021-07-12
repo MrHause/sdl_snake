@@ -48,9 +48,18 @@ void Game::update() {
 	manager.update();
 }
 
+auto& foods(manager.getGroup(Game::groupFood));
+auto& snakeEl(manager.getGroup(Game::groupSnake));
+
 void Game::render() {
 	SDL_RenderClear(GameContext::gameRenderer);
-	manager.draw();
+	//manager.draw();
+	for (auto& f : foods) {
+		f->draw();
+	}
+	for (auto& s : snakeEl) {
+		s->draw();
+	}
 	SDL_RenderPresent(GameContext::gameRenderer);
 }
 

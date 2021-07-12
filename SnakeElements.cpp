@@ -2,13 +2,14 @@
 #include <time.h>
 #include <stdlib.h>
 #include "Collision.h"
+#include "Game.h"
 
 SnakeElements::SnakeElements(Manager* manager) : snakeHead(manager->addEntity()), food(manager->addEntity()) {
 	snakeHead.addComponent<TransformComponent>(240.0f, 200.0f, Game::ELEMENT_WIDTH, Game::ELEMENT_HIGHT, 1);
 	snakeHead.addComponent<KeyboardKontroller>();
 	snakeHead.addComponent<SpriteComponent>("assets/head.png");
 	snakeHead.addComponent<ColliderComponent>("head");
-
+	snakeHead.addGroup(Game::groupSnake);
 	srand(time(NULL));
 
 	int food_xpos, food_ypos;
@@ -17,6 +18,7 @@ SnakeElements::SnakeElements(Manager* manager) : snakeHead(manager->addEntity())
 	food.addComponent<TransformComponent>((float)food_xpos, (float)food_ypos, Game::ELEMENT_WIDTH, Game::ELEMENT_HIGHT, 1);
 	food.addComponent<FoodComponent>("assets/food.png");
 	food.addComponent<ColliderComponent>("food");
+	food.addGroup(Game::groupFood);
 }
 
 void SnakeElements::foodUpdatePosition() {
@@ -58,6 +60,7 @@ void SnakeElements::snakeAddTailElement(Manager *manager) {
 	std::string coliderTag = "tail" + std::to_string(snakeTail.size());
 	snakeTail.at(len - 1)->addComponent<ColliderComponent>(coliderTag);
 	tailColiders.push_back(&snakeTail.at(len - 1)->getComponent<ColliderComponent>());
+	snakeTail.at(len - 1)->addGroup(Game::groupSnake);
 }
 
 bool SnakeElements::detectTailCollision() {
